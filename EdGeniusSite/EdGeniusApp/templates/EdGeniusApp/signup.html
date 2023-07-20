@@ -1,0 +1,17 @@
+{% extends 'EdGeniusApp/base.html' %}
+{% block title %}
+Signup
+{% endblock %}
+{% block myhdg %}
+SignUp here!
+{% endblock %}
+{% block body_block %}
+
+<form method="POST" style="text-align: left; margin:0 auto; width:50%">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Sign Up" class='btn btn-outline-light me-1' style="background: #3F88C5">
+
+</form>
+
+{% endblock %}

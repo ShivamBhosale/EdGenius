@@ -1,0 +1,18 @@
+{% extends 'EdGeniusApp/base.html' %}
+{% block title %}
+Login
+{% endblock %}
+{% block myhdg %}
+    Welcome to EdGenius!
+{% endblock %}
+{% block body_block %}
+
+<form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Login" class='btn btn-outline-light me-1' style="background: #3F88C5">
+    <br>
+    <a href="{% url 'EdGeniusApp:password_reset' %}">Forgot password?</a>
+</form>
+
+{% endblock %}
