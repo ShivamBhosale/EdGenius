@@ -7,7 +7,14 @@ from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
+from .models import Courses
+from .forms import CoursesForm
+from django.shortcuts import render, redirect
 
+class Index(TemplateView):
+    template_name = 'EdGeniusApp/index.html'
+
+    
 class LoginInterfaceView(LoginView):
     template_name = 'EdGeniusApp/login.html'
 
@@ -42,4 +49,42 @@ class PasswordResetInterfaceView(PasswordResetView):
     template_name = 'EdGeniusApp/password_reset_form.html'
     email_template_name = 'EdGeniusApp/password_reset_email.html'
     success_url = reverse_lazy("EdGeniusApp:password_reset_done")
+
+class InstructorHomepageView(TemplateView, LoginRequiredMixin):
+    
+    def get(self, request):
+        course_list = Courses.objects.all().order_by()
+        return render(request,'EdGeniusApp/instructor_homepage.html',{'course_list': course_list})
+# class CreateCourseView(TemplateView, LoginRequiredMixin):
+#     def get(self, request):
+#         course_list = Courses.objects.all().order_by()
+#         return render(request,'EdGeniusApp/create_course.html',{'course_list': course_list})
+
+    
+class StudentHomepageView(TemplateView, LoginRequiredMixin):
+    def get(self, request):
+        course_list = Courses.objects.all().order_by()
+        return render(request,'EdGeniusApp/student_homepage.html',{'course_list': course_list})
+    
+
+# views.py
+
+
+def add_course(request):
+    if request.method == 'POST':
+        form = CoursesForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('../instructor_homepage/')  # Replace 'course_list' with the URL name of the page listing all courses
+    else:
+        form = CoursesForm()
+
+    return render(request, 'EdGeniusApp/add_course.html', {'form': form})
+
+
+class CourseDetailView(TemplateView):
+    def get(self, request, course_slug):
+        course = Courses.objects.get(slug=course_slug)
+        return render(request, 'EdGeniusApp/course_detail.html', {'course': course})
+
 

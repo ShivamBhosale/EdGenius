@@ -1,8 +1,59 @@
 {% extends 'EdGeniusApp/base.html' %}
+
 {% block title %}
 Home
 {% endblock %}
 
 {% block body_block %}
 <h1> Instructor Homepage </h1>
+<a href="{% url 'EdGeniusApp:add_course' %}" class="btn btn-primary">Create New Course</a>
+
+        {% if course_list %}
+        
+        <h2> Course List</h2>
+        
+        <!-- <a href="{% url 'EdGeniusApp:add_course' %}" class="btn btn-primary">Create New Course</a> -->
+        <br>
+        <br>
+          <div class="card-container">
+            
+        {% for course in course_list %}
+        <div class="cards-collection">
+            <div class="card text-white bg-dark mb-3" style="width: 18rem;">
+                <img class="card-img-top" src="http://127.0.0.1:8000/{{course.course_image}}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{course.CourseName}}</h5>
+                    <p class="card-text">{{course.description}}</p>
+                    <p class="card-text">Instructor Name: {{course.instructorName}}</p>
+                    
+                    <!-- <a href="http://127.0.0.1:8000/{{course.course_pdf}}" class="btn btn-primary">pdf</a> -->
+                    {% if course.slug %}
+                    <a href="{% url 'EdGeniusApp:course_detail' course.slug %}" class="btn btn-primary">Open Course</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+
+        {% endif %}
+    </div>
+
+
+<style>
+    
+
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        
+       
+    }
+   .cards-collection{
+      margin: 1rem;
+    }
+
+    /* Add any other styling you need */
+</style>
 {% endblock %}
