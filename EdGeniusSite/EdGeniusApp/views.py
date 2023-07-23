@@ -80,9 +80,17 @@ def add_course(request):
         form = CoursesForm()
 
     return render(request, 'EdGeniusApp/add_course.html', {'form': form})
+
+
 class MembershipView(TemplateView):
     def get(self, request):
         return render(request,'EdGeniusApp/membership_login.html')
+    
+class AddCourseFiles(TemplateView):
+     def get(self, request, course_slug):
+        course = get_object_or_404(Courses, slug=course_slug)
+        return render(request,'EdGeniusApp/add_courseFiles.html', {'course':course})
+
 
 class CourseDetailView(TemplateView):
     def get(self, request, course_slug):

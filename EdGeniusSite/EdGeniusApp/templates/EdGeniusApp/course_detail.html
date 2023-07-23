@@ -7,7 +7,7 @@ Course Details - {{ course.CourseName }}
 {% block body_block %}
 
 <div class="all-btns">
-   
+    <a href="{% url 'EdGeniusApp:add_courseFiles' course.slug %}" class="btn btn-primary">Add Course Files</a>
     <a href="{% url 'EdGeniusApp:index' %}" class="btn btn-primary">Take Attendance</a>
     <a href="{% url 'EdGeniusApp:index' %}" class="btn btn-primary">Show Attendance</a>
     <a href="{% url 'EdGeniusApp:index' %}" class="btn btn-primary">Input Grades</a>

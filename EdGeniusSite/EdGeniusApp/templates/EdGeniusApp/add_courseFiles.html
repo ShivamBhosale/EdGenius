@@ -1,0 +1,23 @@
+{% extends 'EdGeniusApp/base.html' %}
+{% block title %}
+Course Details - {{ course.CourseName }}
+{% endblock %}
+
+{% block body_block %}
+
+<h2>{{ course.CourseName }}</h2>
+
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+
+  <!-- Add a new file input field for course files (multiple) -->
+  <div class="form-group">
+    <label for="id_coursefiles">Upload Course Files:</label>
+    <input type="file" name="coursefiles" id="id_coursefiles" multiple>
+  </div>
+
+  <input type="submit" value="Upload Course Files">
+</form>
+
+{% endblock %}

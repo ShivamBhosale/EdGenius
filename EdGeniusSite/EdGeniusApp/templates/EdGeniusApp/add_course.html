@@ -58,8 +58,13 @@
             {{ form.course_video.errors }}
         </div>
         
+        <div class="fieldWrapper">
+          <label for="{{ form.course_files.id_for_label }}">Upload Course Files:</label>
+          {{ form.course_files }}
+          {{ form.course_files.errors }}
+      </div>
        
-        
+     
         <button type="submit" onclick="location.href = '/instructor_homepage/'">Save Course</button>
     </form>
 </div>

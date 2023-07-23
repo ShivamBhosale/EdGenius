@@ -23,6 +23,7 @@ urlpatterns = [
     path('instructor_homepage/', views.InstructorHomepageView.as_view(), name='instructor_homepage'),
     path('student_homepage/', views.StudentHomepageView.as_view(), name='student_homepage'),
     path('add/', views.add_course, name='add_course'),
+    path('<slug:course_slug>/add_courseFiles', views.AddCourseFiles.as_view(),name='add_courseFiles'),
     path('<slug:course_slug>/', views.CourseDetailView.as_view(), name='course_detail'),
     path('<slug:course_slug>/student', views.CourseDetailViewStudent.as_view(), name='course_detailStudent'),
     
