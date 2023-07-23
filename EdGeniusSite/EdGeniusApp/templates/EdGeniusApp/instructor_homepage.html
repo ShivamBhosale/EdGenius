@@ -5,7 +5,7 @@ Home
 {% endblock %}
 
 {% block body_block %}
-<h1> Instructor Homepage </h1>
+<h1> Howdy Professor</h1>
 <a href="{% url 'EdGeniusApp:add_course' %}" class="btn btn-primary">Create New Course</a>
 
         {% if course_list %}
@@ -19,10 +19,10 @@ Home
             
         {% for course in course_list %}
         <div class="cards-collection">
-            <div class="card text-white bg-dark mb-3" style="width: 18rem;">
+            <div class="card text-white bg-dark mb-3" style="width: 18rem; height:25rem">
                 <img class="card-img-top" src="http://127.0.0.1:8000/{{course.course_image}}" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">{{course.CourseName}}</h5>
+                    <h5 class="card-title">{{course.CourseName}} ({{course.course_tag}})</h5>
                     <p class="card-text">{{course.description}}</p>
                     <p class="card-text">Instructor Name: {{course.instructorName}}</p>
                     

@@ -1,0 +1,100 @@
+{% extends 'EdGeniusApp/base.html' %}
+{% block title %}
+Membership
+{% endblock %}
+{% block myhdg %}
+Membership Options
+{% endblock %}
+
+{% block body_block %}
+<br>
+<br>
+<br>
+<div class="row row-cols-1 row-cols-md-3">
+    <div class="col mb-3">
+        <div class="card h-100" id="gold">
+          <div class="card-body">
+            <h4 class="card-title" style="color: #3F88C5">Gold</h4>
+              <h5> Price: 80 CAD</h5>
+              <p class="card-text">Get access to advanced courses and LinkedIn Learning..</p>
+              <button data-price="80" data-membershipType="Gold" class='btn rzp-button1 btn-outline-light me-1' style="background: #3F88C5">Buy Now</button>
+          </div>
+        </div>
+    </div>
+
+    <div class="col mb-3">
+        <div class="card h-100" id="silver">
+          <div class="card-body">
+            <h4 class="card-title" style="color: #3F88C5">Silver</h4>
+              <h5> Price: 50 CAD</h5>
+            <p class="card-text">Get access to available courses..</p>
+              <button data-price="50" data-membershipType="Silver" class='btn rzp-button1 btn-outline-light me-1' style="background: #3F88C5">Buy Now</button>
+          </div>
+        </div>
+    </div>
+
+    <div class="col mb-3">
+        <div class="card h-100" id="bronze">
+          <div class="card-body">
+            <h4 class="card-title" style="color: #3F88C5">Bronze</h4>
+              <h5> Price: 30 CAD</h5>
+                <p class="card-text">Get access to limited courses..</p>
+              <button data-price="30" data-membershipType="Bronze" class='btn rzp-button1 btn-outline-light me-1' style="background: #3F88C5">Buy Now</button>
+          </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+function openRazorpayModal(price, membershipType) {
+    var options = {
+        "key": "rzp_test_EoBnsQIXEZOJxs", // Enter the Key ID generated from the Dashboard
+        "amount": price * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        "currency": "CAD",
+        "name": "EdGenius",
+        "description": membershipType + " Purchase",
+        "image": "https://example.com/your_logo",
+        "handler": function (response) {
+            alert(response.razorpay_payment_id);
+            alert(response.razorpay_order_id);
+            alert(response.razorpay_signature)
+        },
+        "prefill": {
+            "name": "Vishva Deliwala",
+            "email": "vishva.deliwala@example.com",
+            "contact": "9000090000"
+        },
+        "notes": {
+            "address": "Razorpay Corporate Office"
+        },
+        "theme": {
+            "color": "#3399cc"
+        }
+    };
+    var rzp1 = new Razorpay(options);
+    rzp1.on('payment.failed', function (response) {
+        alert(response.error.code);
+        alert(response.error.description);
+        alert(response.error.source);
+        alert(response.error.step);
+        alert(response.error.reason);
+        alert(response.error.metadata.order_id);
+        alert(response.error.metadata.payment_id);
+    });
+
+    rzp1.open();
+}
+document.addEventListener("DOMContentLoaded", function () {
+    var buyButtons = document.querySelectorAll(".rzp-button1");
+    buyButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+            var price = parseFloat(button.dataset.price);
+            var membershipType = button.dataset.membershipType;
+            openRazorpayModal(price, membershipType);
+        });
+    });
+});
+</script>
+
+{% endblock %}

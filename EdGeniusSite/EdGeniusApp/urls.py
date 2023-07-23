@@ -9,6 +9,7 @@ urlpatterns = [
     path('',views.Index.as_view(), name='index'),
     path('homepage/', views.StudentHomeView.as_view(), name='student_home'),
     #path('ihomepage/', views.InstructorHomeView.as_view(), name='instructor_home'),
+    path('membership_login/',views.MembershipView.as_view(), name='membership_login'),
     path('login/', views.LoginInterfaceView.as_view(), name='login'),
     path('logout/', views.LogoutInterfaceView.as_view(), name='logout'),
     path('authorized/', views.AuthorizedView.as_view(), name='authorized'),
@@ -23,5 +24,7 @@ urlpatterns = [
     path('student_homepage/', views.StudentHomepageView.as_view(), name='student_homepage'),
     path('add/', views.add_course, name='add_course'),
     path('<slug:course_slug>/', views.CourseDetailView.as_view(), name='course_detail'),
+    path('<slug:course_slug>/student', views.CourseDetailViewStudent.as_view(), name='course_detailStudent'),
+    
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

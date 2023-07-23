@@ -16,10 +16,17 @@ class Courses(models.Model):
     instructorName = models.ForeignKey(Instructor, max_length=100, on_delete=models.CASCADE,null=True)
     slug = models.SlugField(default='',max_length=100, null=True, blank=True)
     course_video = models.CharField(max_length=1000, blank=True)
-    course_pdf = models.FileField(upload_to='course_pdfs', blank=True)
+    course_files = models.ManyToManyField('CourseFile', blank=True)
    
     def __str__(self):
         return self.CourseName
+    
+class CourseFile(models.Model):
+    course_file = models.FileField(upload_to='course_files')
+
+    def __str__(self):
+        return self.course_file.name
+
     
 def create_slug(instance, new_slug=None):
     slug = slugify(instance.CourseName)

@@ -9,7 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from .models import Courses
 from .forms import CoursesForm
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 class Index(TemplateView):
     template_name = 'EdGeniusApp/index.html'
@@ -80,11 +80,25 @@ def add_course(request):
         form = CoursesForm()
 
     return render(request, 'EdGeniusApp/add_course.html', {'form': form})
-
+class MembershipView(TemplateView):
+    def get(self, request):
+        return render(request,'EdGeniusApp/membership_login.html')
 
 class CourseDetailView(TemplateView):
     def get(self, request, course_slug):
-        course = Courses.objects.get(slug=course_slug)
+        # course = Courses.objects.get(slug=course_slug)
+        # # course_list = get_object_or_404(Courses, slug=course_slug)
+        # return render(request, 'EdGeniusApp/course_detail.html', {'course': course})
+        course = get_object_or_404(Courses, slug=course_slug)
+        
         return render(request, 'EdGeniusApp/course_detail.html', {'course': course})
+class CourseDetailViewStudent(TemplateView):
+    def get(self, request, course_slug):
+        # course = Courses.objects.get(slug=course_slug)
+        # # course_list = get_object_or_404(Courses, slug=course_slug)
+        # return render(request, 'EdGeniusApp/course_detail.html', {'course': course})
+        course = get_object_or_404(Courses, slug=course_slug)
+        return render(request, 'EdGeniusApp/course_detailStudent.html', {'course': course})
+    
 
 

@@ -1,0 +1,24 @@
+{% extends 'EdGeniusApp/base.html' %}
+
+{% block title %}
+Course Details - {{ course.CourseName }}
+{% endblock %}
+
+{% block body_block %}
+
+
+<h2>{{ course.CourseName}}</h2>
+<br>
+<h3>Created by: {{ course.instructorName}}</h3>
+<br>
+<iframe width="800" height="400"
+src="{{course.course_video}}">
+</iframe>
+
+{% for course_file in course.course_files.all %}
+  <h2><a href="{{ course_file.course_file.url }}" class="btn btn-primary">{{course.CourseName}} File {{ forloop.counter }}</a></h2>
+{% endfor %}
+
+
+<!-- Display other course details here -->
+{% endblock %}
