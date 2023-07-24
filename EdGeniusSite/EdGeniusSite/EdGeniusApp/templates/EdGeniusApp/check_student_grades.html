@@ -1,0 +1,59 @@
+{% extends 'EdGeniusApp/base.html' %}
+{% block title %}
+    Check Student Grades
+{% endblock %}
+
+{% block body_block %}
+<div class="container mt-5">
+      <h1>Displaying Grades for {{ course_name }} Course</h1>
+    </div>
+
+    {% if student_list %}
+    <div class="container mt-3">
+      <label>Select a Student to view their Grades</label>
+      {# action="{% url 'myapp1:fetchstudent' %}"#}
+      <form action="{% url 'EdGeniusApp:check_student_grades' course_name %}" method="get">
+        <select name="select-student-grades-dropdown">
+          {% for student in student_list %}
+              {% if student.email == student_email %}
+                <option selected value="{{ student.student_email }}">{{ student.student_firstname }} {{ student.student_lastname }} </option>
+              {% else %}
+                 <option value="{{ student.student_email }}"> {{ student.student_firstname }} {{ student.student_lastname }} </option>
+              {% endif %}
+          {% endfor %}
+        </select>
+        <input type="submit" name="button" value="Search" />
+      </form>
+    </div>
+
+    {% endif %}
+    {% if individual_student_grades %}
+    <div class="container mt-5">
+      {% if student_name %}
+      <h4>Student Name: {{ student_name }}</h4>
+      {% endif %}
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>Grade Item</th>
+              <th>Grade</th>
+              <th>Feedbacks</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for student in individual_student_grades %}
+            <tr>
+              <td>{{ student.gradeItem }}</td>
+              <td>{{ student.grade }}</td>
+              <td>{{ student.feedback }}</td>
+
+              {% endfor %}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {% endif %}
+
+{% endblock %}

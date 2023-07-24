@@ -1,0 +1,63 @@
+{% extends 'EdGeniusApp/base.html' %}
+{% block title %}
+Fetch Attendance
+{% endblock %}
+
+{% block body_block %}
+
+ <div class="container mt-5">
+      <h1>Displaying Attendance for {{ course_id }} Course</h1>
+    </div>
+
+    {% if student_list %}
+        <div class="container mt-5">
+        <label>Attendance</label>
+{#    action="{% url 'myapp1:fetchstudent' %}"#}
+        <form action="{% url 'EdGeniusApp:fetch_attendance_student' course_id%}" method="get">
+            <select name="select-student-name-dropdown">
+                {% for student in student_list %}
+                    {% if student.email ==  student_email %}
+                        <option selected value="{{ student.email }}">{{ student.firstname }} {{ student.lastname }}</option>
+                    {% else %}
+                        <option value="{{ student.email }}">{{ student.firstname }} {{ student.lastname }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <input type="submit" name="button" value="Search">
+        </form>
+        </div>
+    {% endif %}
+
+
+    {% if individual_student %}
+        <div class="container mt-2">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Email</th>
+                        <th>Attendance</th>
+                        <th>Date</th>
+
+                    </tr>
+                    </thead>
+                <tbody>
+                {% for student in individual_student %}
+                    <tr>
+                    <td>{{ student.firstname }}</td>
+                    <td>{{ student.lastname }}</td>
+                    <td>{{ student.email }}</td>
+                    <td>{{ student.attendance }}</td>
+                    <td>{{ student.date }}</td>
+
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endif %}
+
+{% endblock %}

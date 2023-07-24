@@ -1,0 +1,131 @@
+<!-- add_course.html -->
+{% extends 'EdGeniusApp/base.html' %}
+<!-- add_course.html -->
+
+
+{% block title %}
+   Add Courses
+{% endblock %}
+
+{% block body_block %}
+<div class="container">
+    <h1>Add Course</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        
+        <div class="fieldWrapper">
+            <label for="{{ form.CourseName.id_for_label }}">Course Name:</label>
+            {{ form.CourseName }}
+            {{ form.CourseName.errors }}
+        </div>
+        
+        <div class="fieldWrapper">
+            <label for="{{ form.courseID.id_for_label }}">Course ID:</label>
+            {{ form.courseID }}
+            {{ form.courseID.errors }}
+        </div>
+        
+        <div class="fieldWrapper">
+            <label for="{{ form.description.id_for_label }}">Description:</label>
+            {{ form.description }}
+            {{ form.description.errors }}
+        </div>
+        
+        <div class="fieldWrapper">
+            <label for="{{ form.course_image.id_for_label }}">Course Image:</label>
+            {{ form.course_image }}
+            {{ form.course_image.errors }}
+        </div>
+        
+        <div class="fieldWrapper">
+            <label for="{{ form.course_tag.id_for_label }}">Course Tag:</label>
+            {{ form.course_tag }}
+            {{ form.course_tag.errors }}
+        </div>
+        
+        <div class="fieldWrapper">
+            <label for="{{ form.instructorName.id_for_label }}">Instructor Name:</label>
+            {{ form.instructorName }}
+            {{ form.instructorName.errors }}
+        </div>
+        
+       
+        
+        <div class="fieldWrapper">
+            <label for="{{ form.course_video.id_for_label }}">Course Video URL:</label>
+            {{ form.course_video }}
+            {{ form.course_video.errors }}
+        </div>
+        
+        <div class="fieldWrapper">
+          <label for="{{ form.course_files.id_for_label }}">Upload Course Files:</label>
+          {{ form.course_files }}
+          {{ form.course_files.errors }}
+      </div>
+       
+     
+        <button type="submit" onclick="location.href = '/instructor_homepage/'">Save Course</button>
+    </form>
+</div>
+    <style>
+        /* Custom styles for the form */
+        .container {
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 20px;
+        }
+      
+        h1 {
+          text-align: center;
+          margin-bottom: 30px;
+        }
+      
+        .fieldWrapper {
+          margin-bottom: 20px;
+        }
+      
+        label {
+          font-weight: bold;
+        }
+      
+        input[type="text"],
+        input[type="url"],
+        textarea {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          box-sizing: border-box;
+        }
+      
+        select {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          box-sizing: border-box;
+        }
+      
+        .fieldWrapper label {
+          display: block;
+          margin-bottom: 5px;
+        }
+      
+        button[type="submit"] {
+          background-color: #007bff;
+          color: #fff;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+      
+        button[type="submit"]:hover {
+          background-color: #0056b3;
+        }
+      </style>
+      
+    {% endblock %}
+
+

@@ -1,0 +1,106 @@
+{% extends 'EdGeniusApp/base.html' %}
+{% block title %}
+    Provide Grades
+{% endblock %}
+
+{% block body_block %}
+<div class="container mt-5">
+      <h1>Grades for {{ course }} Course</h1>
+    </div>
+
+    <div class="container mt-5">
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>Firstname</th>
+              <th>Lastname</th>
+              <th>Email</th>
+              <th style="text-align: center">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <form action="" , method="post">
+              {% for student in student_list %}
+              <tr>
+                <td>{{ student.firstname}}</td>
+                <td>{{ student.lastname }}</td>
+                <td>{{ student.email }}</td>
+                <td style="text-align: center">
+                  <a
+                    href="#editEmployeeModal-{{ forloop.counter }}"
+                    class="edit"
+                    data-toggle="modal"
+                    ><i
+                      class="bi bi-pencil-square"
+                      data-toggle="tooltip"
+                      title="Delete"
+                      style="font-size: 1.5rem; text-align: center"
+                    ></i
+                  ></a>
+                </td>
+              </tr>
+              {% endfor %}
+            </form>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+   {#    modal form#}
+    {% for i in student_list %}
+    <div id="editEmployeeModal-{{ forloop.counter }}" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="/grades_provider/{{ course }}" , method="post">
+                    {% csrf_token %}
+                    <div class="modal-header">
+                        <h4 class="modal-title">Provide Grades</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col">
+                                <label>First Name</label>
+                                <input type="text" readonly value="{{ i.firstname }}" class="form-control" name="fname" aria-label="First name">
+                            </div>
+                            <div class="col">
+                                <label>Last Name</label>
+                                <input type="text" readonly value="{{ i.lastname }}" class="form-control" name="lname" aria-label="Last name">
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <label>Email</label>
+                            <input name="email" readonly value="{{ i.email }}" type="email" class="form-control" required>
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <label>Grade Item</label>
+                            <input name="gradeitem"  type="text" placeholder="e.g. Assignment 1 or Test 1" class="form-control" required>
+                        </div>
+
+                         <div class="form-group mt-2">
+                            <label>Grades</label>
+                            <input name="grades"  type="text" placeholder="e.g. 8/10" class="form-control" required>
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <label>Feedback</label>
+                            <input name="feedback"  type="text" placeholder="Provide some feedbacks..." class="form-control" required>
+                        </div>
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <input type="submit" class="btn btn-info" value="Update">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'EdGeniusApp/base.html' %}
+{% load static %}
+{% block title %}
+    My Courses
+{% endblock %}
+{% block body_block %}
+    <div class="container mt-5">
+      <h2>My Courses</h2>
+      <div
+        class="container mt-5 mb-5 d-flex flex-row justify-content-center flex-wrap">
+        <div class="card mt-5 mr-5" style="width: 18rem">
+          <img
+            class="card-img-top"
+            src="{% static 'EdGeniusApp/my-course-card.jpg' %}"
+            alt="Card image cap"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Course 1</h5>
+            <p class="card-text">
+              Some quick example text to build on the card title and make up the
+              bulk of the card's content.
+            </p>
+            <a href="#" class="btn btn-primary btn-block">View Course Page</a>
+          </div>
+        </div>
+
+        <div class="card mt-5 mr-5" style="width: 18rem">
+          <img
+            class="card-img-top"
+            src="{% static 'EdGeniusApp/my-course-card.jpg' %}"
+            alt="Card image cap"
+          />
+          <div class="card-body">
+            <h5 class="card-title">NDS</h5>
+            <p class="card-text">
+              Some quick example text to build on the card title and make up the
+              bulk of the card's content.
+            </p>
+            <a href="fetch_attendance/NDS" class="btn btn-primary btn-block">View Course Page</a>
+          </div>
+        </div>
+
+        <div class="card mt-5 mr-5" style="width: 18rem">
+          <img
+            class="card-img-top"
+            src="{% static 'EdGeniusApp/my-course-card.jpg' %}"
+            alt="Card image cap"
+          />
+          <div class="card-body">
+            <h5 class="card-title">IADS</h5>
+            <p class="card-text">
+              Some quick example text to build on the card title and make up the
+              bulk of the card's content.
+            </p>
+            <a href="fetch_attendance/IADS" class="btn btn-primary btn-block">View Course Page</a>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

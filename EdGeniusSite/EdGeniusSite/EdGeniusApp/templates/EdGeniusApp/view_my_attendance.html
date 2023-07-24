@@ -1,0 +1,39 @@
+{% extends 'EdGeniusApp/base.html' %}
+{% block title %}
+    My Attendance
+{% endblock %}
+
+{% block body_block %}
+<div class="container mt-5">
+      <h1>Course: {{ course_name }}</h1>
+    </div>
+     <div class="container mt-5">
+      <h4>My Attendance</h4>
+    </div>
+  {% if attendance %}
+    <div class="container mt-5">
+      {% if student_name %}
+      <h4>Student Name: {{ student_name }}</h4>
+      {% endif %}
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Attendance</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for attend in attendance %}
+            <tr>
+              <td>{{ attend.date }}</td>
+              <td>{{attend.attendance }}</td>
+
+              {% endfor %}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {% endif %}
+{% endblock %}

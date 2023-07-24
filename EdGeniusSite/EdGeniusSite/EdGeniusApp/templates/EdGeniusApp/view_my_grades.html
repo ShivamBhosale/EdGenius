@@ -1,0 +1,43 @@
+{% extends 'EdGeniusApp/base.html' %}
+{% block title %}
+    My Grades
+{% endblock %}
+
+{% block body_block %}
+
+<div class="container mt-5">
+      <h1>Course: {{ course_name }}</h1>
+    </div>
+     <div class="container mt-5">
+      <h4>My Grades</h4>
+    </div>
+    {% if grades %}
+    <div class="container mt-5">
+      {% if student_name %}
+      <h4>Student Name: {{ student_name }}</h4>
+      {% endif %}
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>Grade Item</th>
+              <th>Grade</th>
+              <th>Feedbacks</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for grade in grades %}
+            <tr>
+              <td>{{ grade.gradeItem }}</td>
+              <td>{{ grade.grade }}</td>
+              <td>{{ grade.feedback }}</td>
+
+              {% endfor %}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {% endif %}
+
+{% endblock %}
