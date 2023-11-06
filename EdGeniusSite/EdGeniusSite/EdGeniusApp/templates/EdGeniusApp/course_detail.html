@@ -1,20 +1,24 @@
-{% extends 'EdGeniusApp/base.html' %}
+{% extends 'EdGeniusApp/base_instructor.html' %}
 
 {% block title %}
-Course Details - {{ course.CourseName }}
+Course Details - {{ course.course_name }}
 {% endblock %}
 
 {% block body_block %}
 
-<div class="all-btns">
-    <a href="{% url 'EdGeniusApp:add_courseFiles' course.slug %}" class="btn btn-primary">Add Course Files</a>
-    <a href="{% url 'EdGeniusApp:index' %}" class="btn btn-primary">Take Attendance</a>
-    <a href="{% url 'EdGeniusApp:index' %}" class="btn btn-primary">Show Attendance</a>
-    <a href="{% url 'EdGeniusApp:index' %}" class="btn btn-primary">Input Grades</a>
-    <a href="{% url 'EdGeniusApp:index' %}" class="btn btn-primary">Show Grades</a>
-</div>
+{#<div class="all-btns">#}
+{#    <a href="{% url 'EdGeniusApp:add_courseFiles' course.slug %}" class="btn btn-primary">Add Course Files</a>#}
+{#    <a href="{% url 'EdGeniusApp:index' %}" class="btn btn-primary">Take Attendance</a>#}
+{#    <a href="{% url 'EdGeniusApp:index' %}" class="btn btn-primary">Show Attendance</a>#}
+{#    <a href="{% url 'EdGeniusApp:index' %}" class="btn btn-primary">Input Grades</a>#}
+{#    <a href="{% url 'EdGeniusApp:index' %}" class="btn btn-primary">Show Grades</a>#}
+{#</div>#}
 <br>
-<h2>{{ course.CourseName}}</h2>
+<h2>{{ course.course_name}}</h2>
+<a href="{% url 'EdGeniusApp:student_attendance' course.course_name %}" class="btn btn-outline-light me-1" style="background: #3F88C5"> Update attendance</a>
+<a href="{% url 'EdGeniusApp:fetch_attendance' course.course_name %}" class="btn btn-outline-light me-1" style="background: #3F88C5"> Check attendance</a>
+<a href="{% url 'EdGeniusApp:grades_provider' course.course_name%}" class="btn btn-outline-light me-1" style="background: #3F88C5"> Provide Grades</a>
+<a href="{% url 'EdGeniusApp:check_student_grades' course.course_name%}" class="btn btn-outline-light me-1" style="background: #3F88C5"> Check Grades</a>
 <br>
 <br>
 <iframe width="800" height="400"
@@ -22,7 +26,7 @@ src="{{course.course_video}}">
 </iframe>
 <h1>Course Material</h1>
 {% for course_file in course.course_files.all %}
-  <h2><a href="{{ course_file.course_file.url }}" class="btn btn-primary">{{course.CourseName}} File {{ forloop.counter }}</a></h2>
+  <h2><a href="{{ course_file.course_file.url }}" class="btn btn-outline-light me-1" style="background: #3F88C5">{{course.course_name}} File {{ forloop.counter }}</a></h2>
 {% endfor %}
 <!-- Display other course details here -->
 {% endblock %}

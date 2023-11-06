@@ -1,4 +1,4 @@
-{% extends 'EdGeniusApp/base.html' %}
+{% extends 'EdGeniusApp/base_instructor.html' %}
 {% block title %}
     Check Student Grades
 {% endblock %}
@@ -16,9 +16,9 @@
         <select name="select-student-grades-dropdown">
           {% for student in student_list %}
               {% if student.email == student_email %}
-                <option selected value="{{ student.student_email }}">{{ student.student_firstname }} {{ student.student_lastname }} </option>
+                <option selected value="{{ student.email }}">{{ student.firstname }} {{ student.lastname }} </option>
               {% else %}
-                 <option value="{{ student.student_email }}"> {{ student.student_firstname }} {{ student.student_lastname }} </option>
+                 <option value="{{ student.email }}"> {{ student.firstname }} {{ student.lastname }} </option>
               {% endif %}
           {% endfor %}
         </select>

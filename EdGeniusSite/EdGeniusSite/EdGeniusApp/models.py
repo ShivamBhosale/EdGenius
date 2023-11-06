@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from django.utils.text import slugify
@@ -38,13 +38,9 @@ class Instructor(models.Model):
 def create_or_update_related_models(sender, instance, created, **kwargs):
     if created:
         if instance.user_type == "Student":
-            student = Student.objects.create(user=instance, firstname=instance.first_name, lastname=instance.last_name, email=instance.email)
-            student_group = Group.objects.get(name="Student")
-            instance.groups.add("Student")
+            Student.objects.create(user=instance, firstname=instance.first_name, lastname=instance.last_name, email=instance.email)
         elif instance.user_type == "Instructor":
-            instructor = Instructor.objects.create(user=instance, firstname=instance.first_name, lastname=instance.last_name, email=instance.email)
-            instructor_group = Group.objects.get(name="Instructor")
-            instance.groups.add("Instructor")
+            Instructor.objects.create(user=instance, firstname=instance.first_name, lastname=instance.last_name, email=instance.email)
     else:
         if instance.user_type == "Student":
             try:
@@ -59,14 +55,13 @@ def create_or_update_related_models(sender, instance, created, **kwargs):
             except Instructor.DoesNotExist:
                 Instructor.objects.create(user=instance, firstname=instance.first_name, lastname=instance.last_name, email=instance.email)
 
-#
-# class Membership(models.Model):
-#     user = models.ForeignKey(Student, on_delete=models.CASCADE, related_name="student")
-#     is_paid = models.BooleanField(default=False)
-#     razor_pay_order_id = models.CharField(max_length=100, null=True, blank=True)
-#     razor_pay_payment_id = models.CharField(max_length=100, null=True, blank=True)
-#     razor_pay_payment_signature = models.CharField(max_length=100, null=True, blank=True)
 
+class Membership(models.Model):
+    user = models.ForeignKey(Student, on_delete=models.CASCADE, related_name="student")
+    is_paid = models.BooleanField(default=False)
+    razor_pay_order_id = models.CharField(max_length=100, null=True, blank=True)
+    razor_pay_payment_id = models.CharField(max_length=100, null=True, blank=True)
+    razor_pay_payment_signature = models.CharField(max_length=100, null=True, blank=True)
 
 class Courses(models.Model):
     course_name = models.CharField(max_length=100)
@@ -116,13 +111,13 @@ class CourseFile(models.Model):
 
 
 def create_slug(instance, new_slug=None):
-    slug = slugify(instance.CourseName)
+    slug = slugify(instance.course_name)
     if new_slug is not None:
         slug = new_slug
-    qs = Courses.objects.filter(slug=slug).order_by('courseID')
+    qs = Courses.objects.filter(slug=slug).order_by('pk')
     exists = qs.exists()
     if exists:
-        new_slug = "%s-%s" % (slug, qs.first().courseID)
+        new_slug = "%s-%s" % (slug, qs.first())
         return create_slug(instance, new_slug=new_slug)
     return slug
 

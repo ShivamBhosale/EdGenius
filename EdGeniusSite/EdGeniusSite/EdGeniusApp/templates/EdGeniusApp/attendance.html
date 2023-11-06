@@ -1,4 +1,4 @@
-{% extends 'EdGeniusApp/base.html' %}
+{% extends 'EdGeniusApp/base_instructor.html' %}
 {% block title %}
 Attendance
 {% endblock %}
@@ -49,7 +49,7 @@ Attendance
     <div id="editEmployeeModal-{{ forloop.counter }}" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="{% url 'EdGeniusApp:student_attendance' course_name%}" , method="post">
+                <form action="{% url 'EdGeniusApp:student_attendance' course_name %}" , method="post">
                     {% csrf_token %}
                     <div class="modal-header">
                         <h4 class="modal-title">Attendance</h4>

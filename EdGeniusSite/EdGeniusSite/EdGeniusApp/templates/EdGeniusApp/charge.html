@@ -1,0 +1,8 @@
+{% extends 'EdGeniusApp/base.html' %}
+{% block title %}
+Payment Success
+{% endblock %}
+
+{% block body_block %}
+    <h2> Your payment has been made successfully. Please click <a href="{% url 'EdGeniusApp:logout' %}">here </a> to logout. Login again to access your courses </h2>
+{% endblock %}

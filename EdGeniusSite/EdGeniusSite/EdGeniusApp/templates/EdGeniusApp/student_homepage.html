@@ -4,5 +4,48 @@ Home
 {% endblock %}
 
 {% block body_block %}
-<h1> Helllo {{ first_name }} </h1>
+<h1> Hello {{ first_name }} </h1>
+
+        {% if course_data_list %}
+
+        <h2> Your Courses</h2>
+
+          <div class="card-container">
+
+        {% for course in course_data_list %}
+        <div class="cards-collection">
+            <div class="card text-white bg-dark mb-3" style="width: 18rem; height:25rem">
+                <img class="card-img-top" src="http://127.0.0.1:8000/{{course.course_image}}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{course.course_name}} ({{ course.course_tag }})</h5>
+                    <p class="card-text">{{course.description}}</p>
+                    <p class="card-text">{{course.instructor}}</p>
+                    <!-- <a href="http://127.0.0.1:8000/{{course.course_pdf}}" class="btn btn-primary">pdf</a> -->
+                    <a href="{% url 'EdGeniusApp:course_detailStudent' course.slug %}" class="btn btn-outline-light me-1" style="background: #3F88C5">Open Course</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+
+        {% endif %}
+    </div>
+
+
+<style>
+
+
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+
+    }
+   .cards-collection{
+      margin: 1rem;
+    }
+
+    /* Add any other styling you need */
+</style>
 {% endblock %}

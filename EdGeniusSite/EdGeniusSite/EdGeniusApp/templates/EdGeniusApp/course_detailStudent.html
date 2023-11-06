@@ -1,24 +1,21 @@
 {% extends 'EdGeniusApp/base.html' %}
 
 {% block title %}
-Course Details - {{ course.CourseName }}
+Course Details - {{ course.course_name }}
 {% endblock %}
 
 {% block body_block %}
-
-
-<h2>{{ course.CourseName}}</h2>
+<h2>{{ course.course_name}}</h2>
 <br>
-<h3>Created by: {{ course.instructorName}}</h3>
+<h3>Created by: {{ course.instructor}}</h3>
+    <a href="{% url 'EdGeniusApp:my_attendance' course.course_name %}" class="btn btn-outline-light me-1" style="background: #3F88C5"> View My attendance</a>
+    <a href="{% url 'EdGeniusApp:my_grades' course.course_name%}" class="btn btn-outline-light me-1" style="background: #3F88C5"> View My Grades</a>
 <br>
 <iframe width="800" height="400"
 src="{{course.course_video}}">
 </iframe>
-
 {% for course_file in course.course_files.all %}
-  <h2><a href="{{ course_file.course_file.url }}" class="btn btn-primary">{{course.CourseName}} File {{ forloop.counter }}</a></h2>
+  <h2><a href="{{ course_file.course_file.url }}" class="btn btn-outline-light me-1" style="background: #3F88C5">{{course.course_name}} File {{ forloop.counter }}</a></h2>
 {% endfor %}
 
-
-<!-- Display other course details here -->
 {% endblock %}

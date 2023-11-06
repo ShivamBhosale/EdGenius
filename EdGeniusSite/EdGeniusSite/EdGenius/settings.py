@@ -49,7 +49,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'EdGeniusApp.middleware.SessionTimeoutMiddleware',
+    "EdGeniusApp.middleware.SessionTimeoutMiddleware"
 ]
 
 STATIC_URL = '/static/'
@@ -70,6 +70,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "EdGeniusApp.context_processor.active_page"
             ],
         },
     },
@@ -135,13 +136,14 @@ EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "vishva.deliwala@gmail.com"
-EMAIL_HOST_PASSWORD = ""
+EMAIL_HOST_PASSWORD = "liei tqnw ygkc wstv"
 
 LOGIN_URL = '/login/'
-
-KEY_ID = 'rzp_test_EoBnsQIXEZOJxs'
-KEY_SECRET = 'N8dOOnhYI5AcC5rLnCfjLPYL'
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 SESSION_COOKIE_AGE = 600
 
+STRIPE_SECRET_KEY ='sk_test_51NXR7jIPmX6IhXQyUjNsAxEp9DLN1VaybqpEODFy2GHNCVxEV6NAB2y7xMq39NuiZR6ceHwfJEBfaeD4yCa776zO00Dwd0fWEx'
+STRIPE_PUBLISHABLE_KEY ='pk_test_51NXR7jIPmX6IhXQyEtlDLcYhoLIVS45x3kwEtZzsszpTorglxHAyUFMScxZ50YCPZxmZj3yhdu447g8qVndL3Sfl00mwKWwpnf'
+
+USE_TZ = False

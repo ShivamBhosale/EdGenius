@@ -1,4 +1,4 @@
-{% extends 'EdGeniusApp/base.html' %}
+{% extends 'EdGeniusApp/base_instructor.html' %}
 {% block title %}
 Fetch Attendance
 {% endblock %}
@@ -6,14 +6,14 @@ Fetch Attendance
 {% block body_block %}
 
  <div class="container mt-5">
-      <h1>Displaying Attendance for {{ course_id }} Course</h1>
+      <h1>Displaying Attendance for {{ course_name }} Course</h1>
     </div>
 
     {% if student_list %}
         <div class="container mt-5">
         <label>Attendance</label>
 {#    action="{% url 'myapp1:fetchstudent' %}"#}
-        <form action="{% url 'EdGeniusApp:fetch_attendance_student' course_id%}" method="get">
+        <form action="{% url 'EdGeniusApp:fetchstudent' course_name%}" method="get">
             <select name="select-student-name-dropdown">
                 {% for student in student_list %}
                     {% if student.email ==  student_email %}
@@ -46,9 +46,9 @@ Fetch Attendance
                 <tbody>
                 {% for student in individual_student %}
                     <tr>
-                    <td>{{ student.firstname }}</td>
-                    <td>{{ student.lastname }}</td>
-                    <td>{{ student.email }}</td>
+                    <td>{{ student.student.firstname}}</td>
+                    <td>{{ student.student.lastname }}</td>
+                    <td>{{ student.student.email }}</td>
                     <td>{{ student.attendance }}</td>
                     <td>{{ student.date }}</td>
 

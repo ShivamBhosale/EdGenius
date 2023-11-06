@@ -1,0 +1,88 @@
+{% extends 'EdGeniusApp/base.html' %}
+{% block title %}
+Membership
+{% endblock %}
+{% block myhdg %}
+Membership Options
+{% endblock %}
+{% block body_block %}
+    <h4> Please select the membership as per your requirement: </h4>
+<br>
+<br>
+<br>
+ <div class="container mt-5">
+        <h1>Choose a Membership</h1>
+
+    </div>
+     <div class="container mt-5">
+
+         <div class="row row-cols-1 row-cols-md-3">
+    <div class="col mb-3">
+        <div class="card h-100" id="gold">
+          <div class="card-body">
+            <h4 class="card-title" style="color: #3F88C5">Gold</h4>
+              <h5> Price: 80 CAD</h5>
+              <p class="card-text">Get access to advanced courses and LinkedIn Learning..</p>
+              <form action="{% url 'EdGeniusApp:charge' 8000 %}" method="post">
+             {% csrf_token %}
+             <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                 data-key = "{{ key }}"
+                 data-description ="Payment Gateway"
+                 data-amount="8000"
+                 data-locale="auto" >
+
+            </script>
+
+              </form>
+          </div>
+        </div>
+    </div>
+
+    <div class="col mb-3">
+        <div class="card h-100" id="silver">
+          <div class="card-body">
+            <h4 class="card-title" style="color: #3F88C5">Silver</h4>
+              <h5> Price: 50 CAD</h5>
+            <p class="card-text">Get access to available courses..</p>
+              <div class="mt-4">
+               <form action="{% url 'EdGeniusApp:charge' 5000 %}" method="post">
+             {% csrf_token %}
+             <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                 data-key = "{{ key }}"
+                 data-description ="Payment Gateway"
+                 data-amount="5000"
+                 data-locale="auto" >
+
+            </script>
+
+              </form>
+              </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="col mb-3">
+        <div class="card h-100" id="bronze">
+          <div class="card-body">
+            <h4 class="card-title" style="color: #3F88C5">Bronze</h4>
+              <h5> Price: 30 CAD</h5>
+                <p class="card-text">Get access to limited courses..</p>
+              <div class="mt-4">
+                  <form action="{% url 'EdGeniusApp:charge' 3000 %}" method="post" >
+             {% csrf_token %}
+             <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                 data-key = "{{ key }}"
+                 data-description ="Payment Gateway"
+                 data-amount="3000"
+                 data-locale="auto" >
+
+             </script>
+
+              </form>
+              </div>
+          </div>
+        </div>
+    </div>
+</div>
+     </div>
+{% endblock %}

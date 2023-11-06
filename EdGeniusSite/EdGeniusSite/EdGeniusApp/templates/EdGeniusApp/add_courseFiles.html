@@ -1,11 +1,11 @@
 {% extends 'EdGeniusApp/base.html' %}
 {% block title %}
-Course Details - {{ course.CourseName }}
+Course Details - {{ course.course_name }}
 {% endblock %}
 
 {% block body_block %}
 
-<h2>{{ course.CourseName }}</h2>
+<h2>{{ course.course_name }}</h2>
 
 <form method="post" enctype="multipart/form-data">
   {% csrf_token %}
